@@ -278,25 +278,31 @@ sudo /var/www/deploy-api.sh
 ```
 
 ```yaml
-name: Deploy to VPS
+name: Deploy to Main VPS
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Deploy to VPS
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.VPS_HOST }}
-        username: ${{ secrets.VPS_USERNAME }}
-        key: ${{ secrets.VPS_SSH_KEY }}
-        script: |
-          sudo /var/www/deploy-api.sh
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          passphrase: ${{ secrets.VPS_SSH_PASSPHRASE }}
+          port: ${{ secrets.VPS_PORT }}
+          script: |
+            bash /var/www/update-api-plataforma.sh
 ```
 
 **Configurar Secrets en GitHub**:
@@ -305,6 +311,7 @@ jobs:
    - `VPS_HOST`: IP de tu VPS
    - `VPS_USERNAME`: tu usuario SSH
    - `VPS_SSH_KEY`: tu clave privada SSH
+   - `VPS_SSH_PASSPHRASE`: tu PASSPHRASE SSH
 
 **Para generar y copiar SSH key al VPS**:
 ```bash
@@ -345,28 +352,3 @@ sudo netstat -tulpn | grep :3000
 
 ---
 
-## Resumen del Orden Correcto
-
-1. ✅ Configurar DNS en GoDaddy
-2. ✅ Instalar dependencias del servidor (Node, PM2, Nginx, Git)
-3. ✅ Crear estructura de directorios
-4. ✅ Clonar proyecto y compilar
-5. ✅ Iniciar con PM2
-6. ✅ Configurar Nginx SIN SSL
-7. ✅ Crear enlace simbólico sites-enabled
-8. ✅ Verificar sintaxis y reiniciar Nginx
-9. ✅ **Probar** que funciona en HTTP
-10. ✅ Aplicar SSL con Certbot
-11. ✅ Crear script de automatización
-12. ✅ (Opcional) Configurar GitHub Actions
-
----
-
-## Errores Corregidos en tu Flujo Original
-
-1. **Faltaba instalación de dependencias del servidor** (Node, Nginx, PM2)
-2. **Script tenía error de sintaxis**: línea con `>` mal cerrada
-3. **Faltaba verificar que la app funcione antes de aplicar SSL**
-4. **Faltaba configurar PM2 startup** para que se inicie al reiniciar servidor
-5. **Permisos del script de deploy**: necesita `chmod +x`
-6. **GitHub Action**: faltaba configuración de SSH keys
