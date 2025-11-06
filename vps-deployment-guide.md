@@ -308,10 +308,24 @@ jobs:
 **Configurar Secrets en GitHub**:
 1. Ve a tu repositorio → Settings → Secrets → Actions
 2. Agrega:
-   - `VPS_HOST`: IP de tu VPS
-   - `VPS_USERNAME`: tu usuario SSH
-   - `VPS_SSH_KEY`: tu clave privada SSH
-   - `VPS_SSH_PASSPHRASE`: tu PASSPHRASE SSH
+   - `VPS_HOST`: srv1089405.hstgr.cloud
+   - `VPS_USERNAME`: root
+   - `VPS_SSH_KEY`: -----BEGIN OPENSSH PRIVATE KEY-----
+b3BlbnNzaC1rZXktdjEAAAAACmFlczI1Ni1jdHIAAAAGYmNyeXB0AAAAGAAAABBTzlJ3UH
+k89PmZiS2eVu1hAAAAGAAAAAEAAAAzAAAAC3NzaC1lZDI1NTE5AAAAID9mydceond3xYxY
+b/oi7mzjGljNWzNgZnKb25SW8rjUAAAAoNgchDp/ZbeA5vDMzQtTmPcdDOpnjRVrtvNslX
+1y5uCn87lmrwLa6IhGV/XcpqeZjszhfjKwN+/Vy8fus9QGBzxPUXOj6VcXcc+3vkBfUTHB
+bzLYfbSAPPT3wVYH+4K1B+YpF8q9WW9PLu8jyaR2iSlbDPr6Baqi7svT9wiN2B2Z58e7Ma
+bzvCD5CuBuK7jN1aPWQWtCRQDESEpNvTyl68k=
+-----END OPENSSH PRIVATE KEY-----
+   - `VPS_SSH_PASSPHRASE`: makocapital
+  
+
+
+
+Mike
+  10:51
+puerto: 22
 
 **Para generar y copiar SSH key al VPS**:
 ```bash
