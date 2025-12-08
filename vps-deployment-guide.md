@@ -83,6 +83,9 @@ pm2 start dist/index.js --name api
 # O si usas npm script:
 pm2 start npm --name api -- start
 
+#un puerto en particular (next)
+PORT=3011 pm2 start pnpm --name plataforma-dev.mako.mx -- start
+
 # Guardar configuración de PM2
 pm2 save
 
