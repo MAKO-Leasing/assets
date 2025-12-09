@@ -369,3 +369,18 @@ sudo netstat -tulpn | grep :3000
 
 ---
 
+
+
+En el servidor PostgreSQL (217.196.51.110):
+bash# Conectarse al servidor de PostgreSQL
+ssh user@217.196.51.110
+
+# Editar pg_hba.conf
+sudo nano /etc/postgresql/*/main/pg_hba.conf
+
+# O buscar la ubicación exacta
+sudo find /etc/postgresql -name pg_hba.conf
+Agregar esta línea al final del archivo:
+conf# Permitir conexión desde tu servidor de aplicación
+host    extractor-mako    mako    189.183.106.142/32    md5
+
