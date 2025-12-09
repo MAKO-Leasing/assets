@@ -382,5 +382,9 @@ sudo nano /etc/postgresql/*/main/pg_hba.conf
 sudo find /etc/postgresql -name pg_hba.conf
 Agregar esta línea al final del archivo:
 conf# Permitir conexión desde tu servidor de aplicación
+```bash
 host    extractor-mako    mako    189.183.106.142/32    md5
+```
+sudo systemctl restart postgresql
+
 
